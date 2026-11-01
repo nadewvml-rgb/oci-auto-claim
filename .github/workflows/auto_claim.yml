@@ -1,0 +1,31 @@
+name: Oracle Auto Claim
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # සෑම විනාඩි 15 කට වරක් ඉබේම ක්‍රියාත්මක වේ
+  workflow_dispatch: # අවශ්‍ය විටෙක අතින් Run කිරීමට
+
+jobs:
+  claim:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install OCI SDK
+        run: pip install oci
+
+      - name: Run Auto Claim Script
+        env:
+          OCI_USER_OCID: ${{ secrets.OCI_USER_OCID }}
+          OCI_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
+          OCI_TENANCY_OCID: ${{ secrets.OCI_TENANCY_OCID }}
+          OCI_REGION: ${{ secrets.OCI_REGION }}
+          OCI_STACK_OCID: ${{ secrets.OCI_STACK_OCID }}
+          OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
+        run: python claim.py
