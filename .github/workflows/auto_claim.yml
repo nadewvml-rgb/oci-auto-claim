@@ -2,7 +2,7 @@ name: Oracle Auto Claim
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # සෑම විනාඩි 15 කට වරක් ඉබේම ක්‍රියාත්මක වේ
+    - cron: '*/5 * * * *' # සෑම විනාඩි 5 කට වරක් ඉබේම ක්‍රියාත්මක වේ
   workflow_dispatch: # අවශ්‍ය විටෙක අතින් Run කිරීමට
 
 jobs:
