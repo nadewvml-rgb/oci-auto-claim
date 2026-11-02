@@ -5,9 +5,15 @@ on:
     - cron: '*/5 * * * *' # සෑම විනාඩි 5 කට වරක් ඉබේම ක්‍රියාත්මක වේ
   workflow_dispatch: # අවශ්‍ය විටෙක අතින් Run කිරීමට
 
+# එක වරකට එක Workflow එකක් පමණක් ක්‍රියාත්මක වීමට (Jobs එකිනෙක ගැටීම වැළැක්වීමට)
+concurrency:
+  group: oracle-auto-claim
+  cancel-in-progress: false
+
 jobs:
   claim:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
